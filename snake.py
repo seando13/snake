@@ -88,7 +88,12 @@ class snake(object):
 
 
     def reset(self, pos):
-        pass
+        self.head = cube(pos):
+        self.body = []
+        self.body.append(self.head)
+        self.turns = {}
+        self.dirnx = 0
+        self.dirny = 1
 
     def addCube(self):
         tail = self.body[-1]
