@@ -16,14 +16,14 @@ class cube(object):
     def move(self, dirnx, dirny):
         self.dirnx = dirnx
         self.dirny = dirny
-        self.pos(self.pos[0] + self.dirnx, self.pos[1] + self.dirny)
+        self.pos = (self.pos[0] + self.dirnx, self.pos[1] + self.dirny)
 
     def draw(self, surface, eyes=False):
         dis = self.w // self.rows
         i = self.pos[0]
         j = self.pos[1]
 
-        pygame.draw.rect(surface, self.color, (i*dist+1, j*dist+1, dis-2, dis-2))
+        pygame.draw.rect(surface, self.color, (i*dis+1, j*dis+1, dis-2, dis-2))
         if eyes:
             centre = dis // 2
             radius = 3
@@ -122,8 +122,19 @@ def redrawWindow(surface):
 
 
 
-def randomSnack(rows, items):
-    pass
+def randomSnack(rows, item):
+    global rows
+    positions = item.body
+
+    while True:
+        x = random.randrange(rows)
+        y = random.randrange(rows)
+        if len(list(filter(lambda z:z.pos == (x, y), positions))) > 0:
+            continue
+        else:
+            break
+
+    return (x, y)
 
 
 def message_box(subject, content):
@@ -137,12 +148,12 @@ def main():
     s = snake((255, 0, 0), (10, 10))
     flag = True
 
-     clock = pygame.time.Clock()
+    clock = pygame.time.Clock()
 
     while flag:
         pygame.time.delay(50)
         clock.tick(10)
-
+        s.move
         redrawWindow(win)
 
     pass
